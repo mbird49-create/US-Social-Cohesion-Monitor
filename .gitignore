@@ -1,0 +1,7 @@
+# Raw downloads (about 1.4 GB) are re-fetched by pipeline/run_all.sh
+data/raw/
+data/processed/
+.venv/
+logs/
+__pycache__/
+.DS_Store

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>US Social Cohesion Monitor</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">Center for the Study of Anomalous Virtues · working draft</p>
+    <h1>US Social Cohesion Monitor</h1>
+    <p class="lede">A weekly look at the strength, quality and density of bonds within and between social groups, and at how individuals and families are doing. Cohesion is shown as several dimensions, not one score. Every figure says how old its data is. Gaps are marked <span class="tag gap">gap</span> and contested points <span class="tag uncertain">uncertain</span>.</p>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-view="week" aria-selected="true">This week</button>
+      <button role="tab" data-view="explore" aria-selected="false">Explore</button>
+      <button role="tab" data-view="sources" aria-selected="false">Sources &amp; limits</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="week" class="view">
+    <div id="week-status" class="card status"></div>
+    <div id="week-grid" class="grid"></div>
+    <div class="card" id="week-sources"></div>
+  </section>
+
+  <section id="explore" class="view" hidden>
+    <aside id="metric-nav" aria-label="Metrics by dimension"></aside>
+    <div id="metric-panel">
+      <div id="metric-head"></div>
+      <div class="card" id="national-card">
+        <h3>National</h3>
+        <div id="national-chart" class="chart"></div>
+        <p class="note" id="national-note"></p>
+      </div>
+      <div class="card" id="state-card">
+        <div class="card-head">
+          <h3>By state</h3>
+          <div class="controls">
+            <label>Year <select id="year-select"></select></label>
+            <div class="seg" role="group" aria-label="State view">
+              <button data-sv="map" aria-pressed="true">Map</button>
+              <button data-sv="rank" aria-pressed="false">Ranked</button>
+              <button data-sv="table" aria-pressed="false">Table</button>
+            </div>
+            <button id="csv-btn" class="ghost">Download CSV</button>
+          </div>
+        </div>
+        <div id="state-chart" class="chart"></div>
+        <p class="note" id="state-note"></p>
+      </div>
+      <div class="card" id="meta-card"></div>
+    </div>
+  </section>
+
+  <section id="sources" class="view" hidden></section>
+</main>
+
+<div id="tooltip" role="tooltip" hidden></div>
+
+<footer class="wrap foot">
+  <p>Data built <span id="built"></span> by the pipeline in <code>pipeline/</code>. Figures are survey estimates with sampling error; error bars are 95% intervals.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
