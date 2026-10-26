@@ -33,7 +33,9 @@ and downloads any missing raw files (about 1.4 GB unpacked, kept in `data/raw/`)
 A launchd agent runs this script every **Monday at 07:00** (local time):
 `~/Library/LaunchAgents/org.thecav.social-cohesion.weekly.plist`. Output goes to `logs/weekly.log`.
 If the Mac is asleep at that time, the run happens when it next wakes. If it is shut down, that week's run is skipped.
-The job updates only the local `app/` folder. A copy hosted elsewhere (e.g. thecav.org) has to be re-uploaded.
+After the rebuild it commits `app/data/cohesion.json` and pushes to GitHub
+(https://github.com/mbird49-create/US-Social-Cohesion-Monitor), which redeploys the GitHub Pages site through
+`.github/workflows/pages.yml`. A failed push is logged and retried the next week. A copy hosted anywhere else has to be re-uploaded.
 
 ```bash
 launchctl kickstart gui/$(id -u)/org.thecav.social-cohesion.weekly
