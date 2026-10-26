@@ -27,3 +27,18 @@ cd pipeline
 ../$PY htops.py
 ../$PY freshness.py
 ../$PY build.py
+
+# Publish: commit the rebuilt data and push, which redeploys GitHub Pages.
+# A failed push is logged but does not fail the refresh; the next run pushes both weeks.
+cd ..
+if git rev-parse --git-dir >/dev/null 2>&1; then
+  git add app/data/cohesion.json
+  if ! git diff --cached --quiet; then
+    git commit -q -m "Weekly data refresh $(date +%Y-%m-%d)"
+  fi
+  if git log origin/main..main --oneline 2>/dev/null | grep -q .; then
+    GIT_TERMINAL_PROMPT=0 git push -q origin main && echo "publish: pushed to origin" || echo "publish: PUSH FAILED (will retry next run)"
+  else
+    echo "publish: nothing new to push"
+  fi
+fi
